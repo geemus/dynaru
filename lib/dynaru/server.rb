@@ -13,13 +13,20 @@ module Dynaru
       )
     end
 
+    def initialize
+      Thread.main[:data] = {}
+      @data = Thread.main[:data]
+      Thread.main[:members] = {}
+      @members = Thread.main[:members]
+      super
+    end
 
     get '/api/:key' do |key|
-      Thread.main[key]
+      @data[key]
     end
 
     put '/api/:key' do |key|
-      Thread.main[key] = request.body.read
+      @data[key] = request.body.read
       status(204)
     end
 
@@ -42,5 +49,3 @@ module Dynaru
 
   end
 end
-
-Dynaru::Server.run
