@@ -13,22 +13,31 @@ module Dynaru
       )
     end
 
-    before { content_type('application/json') }
 
-    delete '/data/:key' do |key|
-      Thread.main[key] = nil
-    end
-
-    get '/data/:key' do |key|
+    get '/api/:key' do |key|
       Thread.main[key]
     end
 
-    put '/data/:key' do |key|
-      Thread.main[key] = {
-        :updated_at => time.now,
-        :value      => request.body.read
-      }
+    put '/api/:key' do |key|
+      Thread.main[key] = request.body.read
       status(204)
+    end
+
+
+    get '/data/:key' do |key|
+    end
+
+    put '/data/:key' do |key|
+    end
+
+
+    get '/members' do
+    end
+
+    put '/members' do
+    end
+
+    post '/members' do
     end
 
   end
