@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'json'
 
 __DIR__ = File.dirname(__FILE__)
 

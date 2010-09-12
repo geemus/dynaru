@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra/base'
+require 'dynaru/storage'
 
 module Dynaru
   class Server < Sinatra::Base
@@ -14,10 +15,8 @@ module Dynaru
     end
 
     def initialize
-      Thread.main[:data] = {}
-      @data = Thread.main[:data]
-      Thread.main[:members] = {}
-      @members = Thread.main[:members]
+      @data = Dynaru::Storage.new(:data)
+      @members = Dynaru::Storage.new(:members)
       super
     end
 
