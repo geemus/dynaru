@@ -21,29 +21,45 @@ module Dynaru
       super
     end
 
+    # redirect to coordinator or get value
     get '/api/:key' do |key|
       @data[key]
     end
 
+    # redirect to coordinator or set value
     put '/api/:key' do |key|
       @data[key] = request.body.read
       status(204)
     end
 
 
+    # get local value
     get '/data/:key' do |key|
     end
 
+    # set local value
     put '/data/:key' do |key|
     end
 
 
+    # update data
+    put '/data' do
+    end
+
+    # sync data
+    post '/data' do
+    end
+
+
+    # get all members
     get '/members' do
     end
 
+    # update members
     put '/members' do
     end
 
+    # sync members
     post '/members' do
     end
 
