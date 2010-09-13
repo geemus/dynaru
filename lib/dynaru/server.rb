@@ -22,12 +22,12 @@ module Dynaru
 
     # redirect to coordinator or get value
     get '/api/:key' do |key|
-      @data[key]
+      @data.get(key)
     end
 
     # redirect to coordinator or set value
     put '/api/:key' do |key|
-      @data[key] = request.body.read
+      @data.set(key, request.body.read)
       status(204)
     end
 
