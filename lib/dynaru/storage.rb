@@ -3,20 +3,27 @@ module Dynaru
 
     def initialize(namespace)
       @namespace = namespace
-      Thread.main[namespace] ||= {}
+      Thread.main[@namespace] ||= {}
     end
 
-    def all(range = nil)
-      range ||= (Thread.main[@namespace].keys.min)..(Thread.main[@namespace].keys.max)
-      Thread.main[@namespace].reject {|key, value| !range.include?(key)}
-    end
-
-    def get(key)
+    def all
       Thread.main[@namespace]
     end
 
+    def get(key)
+      Thread.main[@namespace][key]
+    end
+
+    def keys
+      Thread.main[@namespace].keys
+    end
+
     def set(key, value)
-      Thread.main[@namespace] = value
+      Thread.main[@namespace][key] = value
+    end
+
+    def range(range)
+      Thread.main[@namespace].reject {|key, value| !range.include?(key)}
     end
 
   end
