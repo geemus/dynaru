@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra/base'
+require 'dynaru/members'
 require 'dynaru/storage'
 
 module Dynaru
@@ -16,7 +17,7 @@ module Dynaru
 
     def initialize
       @data = Dynaru::Storage.new(:data)
-      @members = Dynaru::Storage.new(:members)
+      @members = Dynaru::Members.new
       super
     end
 
@@ -52,14 +53,26 @@ module Dynaru
 
     # get all members
     get '/members' do
+      content_type('application/json')
+      response = @members.all
+      response.to_json
     end
 
-    # update members
+    # takes a list of key/value pairs and updates local members
     put '/members' do
+      content_type('application/json')
+      data = JSON.parse(request.body.read)
+      @members.update(data)
+      status(204)
     end
 
-    # sync members
+    # takes a list of keys from a peer
+    # returns { 'data' => requested key/value pairs, 'keys' => keys requiring updates)
     post '/members' do
+      content_type('application/json')
+      data = JSON.parse(request.body.read)
+      response = @members.compare_keys(data)
+      response.to_json
     end
 
   end
