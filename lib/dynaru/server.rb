@@ -61,8 +61,8 @@ module Dynaru
     # takes a list of key/value pairs and updates local members
     put '/members' do
       content_type('application/json')
-      data = JSON.parse(request.body.read)
-      @members.update(data)
+      body = JSON.parse(request.body.read)
+      @members.update(body['data'])
       status(204)
     end
 
@@ -70,8 +70,8 @@ module Dynaru
     # returns { 'data' => requested key/value pairs, 'keys' => keys requiring updates)
     post '/members' do
       content_type('application/json')
-      data = JSON.parse(request.body.read)
-      response = @members.compare_keys(data)
+      body = JSON.parse(request.body.read)
+      response = @members.compare_keys(body)
       response.to_json
     end
 
