@@ -21,6 +21,9 @@ module Dynaru
       super
     end
 
+
+    # methods for users
+
     # redirect to coordinator or get value
     get '/api/:key' do |key|
       @data.get(key)
@@ -32,6 +35,12 @@ module Dynaru
       status(204)
     end
 
+
+    # methods for coordinators
+
+    # delete local value
+    delete 'data/:key' do |key|
+    end
 
     # get local value
     get '/data/:key' do |key|
@@ -50,6 +59,8 @@ module Dynaru
     post '/data' do
     end
 
+
+    # methods for updating members
 
     # get all members
     get '/members' do
