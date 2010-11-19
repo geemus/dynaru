@@ -39,10 +39,10 @@ module Dynaru
 
       data = []
       for key in response['keys']
-        data[key] = self[key
+        data[key] = self[key]
       end
 
-      connection.request(:method => 'PUT', { 'data' => data }.to_json)
+      connection.request(:method => 'PUT', :body => { 'data' => data }.to_json)
     end
 
     def update(data)
